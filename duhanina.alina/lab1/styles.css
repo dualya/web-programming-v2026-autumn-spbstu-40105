@@ -1,0 +1,8 @@
+.category,
+.name {
+  font-weight: bold;
+}
+
+.price {
+  font-style: italic;
+}
