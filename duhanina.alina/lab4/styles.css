@@ -32,7 +32,7 @@ h1 {
   border: 1px solid #e8d5e6;
   border-radius: 12px;
   background: #fff;
-  box-shadow: 0 2px 10px rgba(160, 81, 149, 0.08);
+  box-shadow: 0 2px 10px rgb(160 81 149 / 8%);
 }
 
 .sidebar h2 {
@@ -67,7 +67,7 @@ input:focus,
 select:focus {
   outline: none;
   border-color: #a05195;
-  box-shadow: 0 0 0 3px rgba(160, 81, 149, 0.15);
+  box-shadow: 0 0 0 3px rgb(160 81 149 / 15%);
 }
 
 input::placeholder {
@@ -91,19 +91,19 @@ button:active {
   background: #75386c;
 }
 
-button.danger {
+.danger {
   background: #c74b6e;
 }
 
-button.danger:hover {
+.danger:hover {
   background: #a93a5b;
 }
 
-button.danger:active {
+.danger:active {
   background: #8f2f4c;
 }
 
-#carList {
+.car-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
@@ -114,12 +114,12 @@ button.danger:active {
   border-radius: 12px;
   padding: 16px;
   border: 1px solid #f0e0ee;
-  box-shadow: 0 2px 8px rgba(160, 81, 149, 0.08);
+  box-shadow: 0 2px 8px rgb(160 81 149 / 8%);
   transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .card:hover {
-  box-shadow: 0 6px 16px rgba(160, 81, 149, 0.14);
+  box-shadow: 0 6px 16px rgb(160 81 149 / 14%);
   transform: translateY(-2px);
 }
 
@@ -152,16 +152,10 @@ button.danger:active {
   border-bottom: none;
 }
 
-.owners li.empty {
+.owners .empty {
   color: #b39cb1;
   font-style: italic;
   border: none;
-}
-
-.owners li button {
-  padding: 2px 8px;
-  font-size: 12px;
-  border-radius: 6px;
 }
 
 .card-actions {
@@ -174,4 +168,10 @@ button.danger:active {
   flex: 1;
   font-size: 13px;
   padding: 8px 10px;
+}
+
+.owners li button {
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 6px;
 }

@@ -6,14 +6,18 @@ export class Car {
   }
 
   addOwner(name) {
-    if (!name || this.owners.includes(name)) return false;
+    if (!name || this.owners.includes(name)) {
+      return false;
+    }
     this.owners.push(name);
     return true;
   }
 
   removeOwner(name) {
     const idx = this.owners.indexOf(name);
-    if (idx === -1) return false;
+    if (idx === -1) {
+      return false;
+    }
     this.owners.splice(idx, 1);
     return true;
   }
@@ -23,7 +27,7 @@ export class Car {
   }
 }
 
-export function groupByMake(cars) {
+export function groupCarsByMake(cars) {
   const acc = {};
 
   for (const car of cars) {
@@ -50,7 +54,7 @@ export function getUniqueOwners(cars) {
   return [...set];
 }
 
-export function groupByOwnerCount(cars) {
+export function groupCarsByOwnerCount(cars) {
   const acc = {};
 
   for (const car of cars) {
@@ -65,7 +69,7 @@ export function groupByOwnerCount(cars) {
   return acc;
 }
 
-export function carsByOwner(cars, name) {
+export function findCarsByOwner(cars, name) {
   const acc = [];
 
   for (const car of cars) {
@@ -77,7 +81,7 @@ export function carsByOwner(cars, name) {
   return acc;
 }
 
-export function modelsByMake(cars, make) {
+export function findModelsByMake(cars, make) {
   const acc = [];
 
   for (const car of cars) {
