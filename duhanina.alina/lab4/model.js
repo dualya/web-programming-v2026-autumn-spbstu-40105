@@ -58,8 +58,7 @@ export function groupCarsByOwnerCount(cars) {
   const acc = {};
 
   for (const car of cars) {
-    const key = car.ownerCount;
-
+    const key = car.owners.length;
     if (!acc[key]) {
       acc[key] = [];
     }

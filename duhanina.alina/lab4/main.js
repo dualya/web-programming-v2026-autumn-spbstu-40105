@@ -5,9 +5,9 @@ import {
   groupCarsByOwnerCount,
   findCarsByOwner,
   findModelsByMake,
-} from "./model.js";
+} from './model.js';
 
-const STORAGE_KEY = "lab4_cars_v1";
+const STORAGE_KEY = 'lab4_cars_v1';
 
 let cars = [];
 
@@ -28,7 +28,7 @@ function loadFromStorage() {
       cars.push(new Car(c.make, c.model, c.owners || []));
     }
   } catch (e) {
-    console.error("Ошибка загрузки из localStorage:", e);
+    console.error('Ошибка загрузки из localStorage:', e);
     cars = [];
   }
 }
@@ -37,7 +37,7 @@ function saveToStorage() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(cars));
 }
 
-window.addEventListener("beforeunload", saveToStorage);
+window.addEventListener('beforeunload', saveToStorage);
 
 function asyncOp(action, delay = 300) {
   return new Promise((resolve) => {
@@ -45,49 +45,49 @@ function asyncOp(action, delay = 300) {
   });
 }
 
-const carForm = document.getElementById("carForm");
-const ownerForm = document.getElementById("ownerForm");
-const carSelect = document.getElementById("carSelect");
-const carList = document.getElementById("carList");
+const carForm = document.getElementById('carForm');
+const ownerForm = document.getElementById('ownerForm');
+const carSelect = document.getElementById('carSelect');
+const carList = document.getElementById('carList');
 
 function render() {
-  carList.innerHTML = "";
+  carList.innerHTML = '';
 
   for (let i = 0; i < cars.length; i++) {
     const car = cars[i];
 
-    const card = document.createElement("div");
-    card.className = "card";
-    card.dataset.testid = "entity-card";
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.testid = 'entity-card';
 
-    const h3 = document.createElement("h3");
+    const h3 = document.createElement('h3');
     h3.textContent = car.make;
 
-    const modelEl = document.createElement("div");
-    modelEl.className = "model";
+    const modelEl = document.createElement('div');
+    modelEl.className = 'model';
     modelEl.textContent = `Модель: ${car.model}`;
 
-    const ul = document.createElement("ul");
-    ul.className = "owners";
+    const ul = document.createElement('ul');
+    ul.className = 'owners';
 
     if (car.owners.length === 0) {
-      const li = document.createElement("li");
-      li.className = "empty";
-      li.textContent = "Нет владельцев";
+      const li = document.createElement('li');
+      li.className = 'empty';
+      li.textContent = 'Нет владельцев';
       ul.appendChild(li);
     } else {
       for (const owner of car.owners) {
-        const li = document.createElement("li");
+        const li = document.createElement('li');
 
-        const span = document.createElement("span");
+        const span = document.createElement('span');
         span.textContent = owner;
 
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "danger";
-        btn.textContent = "✕";
-        btn.title = "Удалить владельца";
-        btn.addEventListener("click", () => handleRemoveOwner(i, owner));
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'danger';
+        btn.textContent = '✕';
+        btn.title = 'Удалить владельца';
+        btn.addEventListener('click', () => handleRemoveOwner(i, owner));
 
         li.appendChild(span);
         li.appendChild(btn);
@@ -95,20 +95,20 @@ function render() {
       }
     }
 
-    const actions = document.createElement("div");
-    actions.className = "card-actions";
+    const actions = document.createElement('div');
+    actions.className = 'card-actions';
 
-    const addBtn = document.createElement("button");
-    addBtn.type = "button";
-    addBtn.textContent = "Добавить владельца";
-    addBtn.addEventListener("click", () => handleQuickAddOwner(i));
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.textContent = 'Добавить владельца';
+    addBtn.addEventListener('click', () => handleQuickAddOwner(i));
 
-    const delBtn = document.createElement("button");
-    delBtn.type = "button";
-    delBtn.className = "danger";
-    delBtn.textContent = "Удалить автомобиль";
-    delBtn.dataset.testid = "delete-entity";
-    delBtn.addEventListener("click", () => handleRemoveCar(i));
+    const delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.className = 'danger';
+    delBtn.textContent = 'Удалить автомобиль';
+    delBtn.dataset.testid = 'delete-entity';
+    delBtn.addEventListener('click', () => handleRemoveCar(i));
 
     actions.appendChild(addBtn);
     actions.appendChild(delBtn);
@@ -121,11 +121,11 @@ function render() {
     carList.appendChild(card);
   }
 
-  carSelect.innerHTML = "";
+  carSelect.innerHTML = '';
 
   if (cars.length === 0) {
-    const opt = document.createElement("option");
-    opt.textContent = "— нет автомобилей —";
+    const opt = document.createElement('option');
+    opt.textContent = '— нет автомобилей —';
     opt.disabled = true;
     opt.selected = true;
     carSelect.appendChild(opt);
@@ -133,7 +133,7 @@ function render() {
   } else {
     carSelect.disabled = false;
     for (let i = 0; i < cars.length; i++) {
-      const opt = document.createElement("option");
+      const opt = document.createElement('option');
       opt.value = String(i);
       opt.textContent = `${cars[i].make} ${cars[i].model}`;
       carSelect.appendChild(opt);
@@ -141,11 +141,11 @@ function render() {
   }
 }
 
-carForm.addEventListener("submit", (e) => {
+carForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const fd = new FormData(carForm);
-  const make = String(fd.get("make") || "").trim();
-  const model = String(fd.get("model") || "").trim();
+  const make = String(fd.get('make') || '').trim();
+  const model = String(fd.get('model') || '').trim();
   if (!make || !model) {
     return;
   }
@@ -159,11 +159,11 @@ carForm.addEventListener("submit", (e) => {
   });
 });
 
-ownerForm.addEventListener("submit", (e) => {
+ownerForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const fd = new FormData(ownerForm);
-  const idx = Number(fd.get("carIndex"));
-  const name = String(fd.get("owner") || "").trim();
+  const idx = Number(fd.get('carIndex'));
+  const name = String(fd.get('owner') || '').trim();
   if (!name || !cars[idx]) {
     return;
   }
@@ -176,7 +176,7 @@ ownerForm.addEventListener("submit", (e) => {
     return ok;
   }).then((ok) => {
     if (!ok) {
-      alert("Такой владелец уже есть у этого автомобиля");
+      alert('Такой владелец уже есть у этого автомобиля');
     } else {
       ownerForm.reset();
     }
@@ -185,7 +185,7 @@ ownerForm.addEventListener("submit", (e) => {
 });
 
 function handleQuickAddOwner(idx) {
-  const name = prompt("Имя владельца:");
+  const name = prompt('Имя владельца:');
   if (name === null) {
     return;
   }
@@ -202,7 +202,7 @@ function handleQuickAddOwner(idx) {
     return ok;
   }).then((ok) => {
     if (!ok) {
-      alert("Такой владелец уже есть у этого автомобиля");
+      alert('Такой владелец уже есть у этого автомобиля');
     }
     render();
   });
