@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Автомобили</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Автомобили</h1>
+      <div class="layout">
+        <aside class="sidebar">
+          <h2>Добавить автомобиль</h2>
+          <form data-testid="entity-form" id="carForm">
+            <input name="make" placeholder="Марка" required autocomplete="off" />
+            <input name="model" placeholder="Модель" required autocomplete="off" />
+            <button type="submit">Добавить автомобиль</button>
+          </form>
+
+          <h2>Добавить владельца</h2>
+          <form data-testid="owner-form" id="ownerForm">
+            <select name="carIndex" id="carSelect" required></select>
+            <input name="owner" placeholder="Имя владельца" required autocomplete="off" />
+            <button type="submit">Добавить владельца</button>
+          </form>
+        </aside>
+
+        <section class="content">
+          <section
+            data-testid="entity-list"
+            aria-label="Список элементов"
+            id="carList"
+          ></section>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
