@@ -55,14 +55,15 @@ export function getUniqueOwners(cars) {
 }
 
 export function groupCarsByOwnerCount(cars) {
-  const acc = {};
+  const acc = new Map();
 
   for (const car of cars) {
     const key = car.owners.length;
-    if (!acc[key]) {
-      acc[key] = [];
+
+    if (!acc.has(key)) {
+      acc.set(key, []);
     }
-    acc[key].push(car);
+    acc.get(key).push(car);
   }
 
   return acc;
