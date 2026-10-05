@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import {useState, useEffect, useCallback, useRef} from 'react';
 import {
   GRID_SIZE,
   INITIAL_SPEED,
@@ -10,8 +10,8 @@ import {
 
 function App() {
   const [snake, setSnake] = useState(getInitialSnake());
-  const [food, setFood] = useState({ x: 15, y: 10 });
-  const [direction, setDirection] = useState({ x: 1, y: 0 });
+  const [food, setFood] = useState({x: 15, y: 10});
+  const [direction, setDirection] = useState({x: 1, y: 0});
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [speed, setSpeed] = useState(INITIAL_SPEED);
@@ -26,7 +26,6 @@ function App() {
       if (!isStarted) {
         return;
       }
-
       const key = e.key.toLowerCase();
 
       if (key === ' ' || key === 'escape') {
@@ -53,22 +52,22 @@ function App() {
         case 'arrowup':
         case 'w':
           e.preventDefault();
-          trySetDirection({ x: 0, y: -1 });
+          trySetDirection({x: 0, y: -1});
           break;
         case 'arrowdown':
         case 's':
           e.preventDefault();
-          trySetDirection({ x: 0, y: 1 });
+          trySetDirection({x: 0, y: 1});
           break;
         case 'arrowleft':
         case 'a':
           e.preventDefault();
-          trySetDirection({ x: -1, y: 0 });
+          trySetDirection({x: -1, y: 0});
           break;
         case 'arrowright':
         case 'd':
           e.preventDefault();
-          trySetDirection({ x: 1, y: 0 });
+          trySetDirection({x: 1, y: 0});
           break;
         default:
           break;
@@ -88,7 +87,7 @@ function App() {
       setSnake((prevSnake) => {
         const dir = directionRef.current;
         const head = prevSnake[0];
-        const newHead = { x: head.x + dir.x, y: head.y + dir.y };
+        const newHead = {x: head.x + dir.x, y: head.y + dir.y};
 
         if (
           newHead.x < 0 ||
@@ -138,15 +137,13 @@ function App() {
     }
   }, []);
 
-  const startGame = useCallback(() => {
-    setIsStarted(true);
-  }, []);
+  const startGame = useCallback(() => setIsStarted(true), []);
 
   const restartGame = useCallback(() => {
     const newSnake = getInitialSnake();
     setSnake(newSnake);
-    setDirection({ x: 1, y: 0 });
-    directionRef.current = { x: 1, y: 0 };
+    setDirection({x: 1, y: 0});
+    directionRef.current = {x: 1, y: 0};
     setScore(0);
     setSpeed(INITIAL_SPEED);
     setGameOver(false);
@@ -244,12 +241,7 @@ function App() {
                 <>
                   <h2>⏸ Пауза</h2>
                   <p className="hint">Нажмите пробел, чтобы продолжить</p>
-                  <button
-                    onClick={() => {
-                      setIsPaused(false);
-                    }}
-                    className="btn"
-                  >
+                  <button onClick={() => setIsPaused(false)} className="btn">
                     ▶ Продолжить
                   </button>
                 </>

@@ -4,9 +4,9 @@ export const SPEED_STEP = 5;
 export const MIN_SPEED = 60;
 
 export const getInitialSnake = () => [
-  { x: 10, y: 10 },
-  { x: 9, y: 10 },
-  { x: 8, y: 10 },
+  {x: 10, y: 10},
+  {x: 9, y: 10},
+  {x: 8, y: 10},
 ];
 
 export const generateFood = (snake) => {
@@ -14,7 +14,7 @@ export const generateFood = (snake) => {
   for (let x = 0; x < GRID_SIZE; x++) {
     for (let y = 0; y < GRID_SIZE; y++) {
       if (!snake.some((s) => s.x === x && s.y === y)) {
-        free.push({ x, y });
+        free.push({x, y});
       }
     }
   }
