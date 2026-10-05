@@ -18,6 +18,8 @@ export const generateFood = (snake) => {
       }
     }
   }
-  if (free.length === 0) return null;
+  if (free.length === 0) {
+    return null;
+  }
   return free[Math.floor(Math.random() * free.length)];
 };

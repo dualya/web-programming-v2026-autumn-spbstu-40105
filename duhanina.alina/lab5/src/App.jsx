@@ -23,20 +23,29 @@ function App() {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (!isStarted) return;
+      if (!isStarted) {
+        return;
+      }
+
       const key = e.key.toLowerCase();
 
       if (key === ' ' || key === 'escape') {
         e.preventDefault();
-        if (!gameOver) setIsPaused((p) => !p);
+        if (!gameOver) {
+          setIsPaused((p) => !p);
+        }
         return;
       }
 
-      if (gameOver) return;
+      if (gameOver) {
+        return;
+      }
 
       const current = directionRef.current;
       const trySetDirection = (newDir) => {
-        if (current.x + newDir.x === 0 && current.y + newDir.y === 0) return;
+        if (current.x + newDir.x === 0 && current.y + newDir.y === 0) {
+          return;
+        }
         setDirection(newDir);
       };
 
@@ -71,7 +80,9 @@ function App() {
   }, [gameOver, isStarted]);
 
   useEffect(() => {
-    if (!isStarted || gameOver || isPaused) return;
+    if (!isStarted || gameOver || isPaused) {
+      return;
+    }
 
     const tick = () => {
       setSnake((prevSnake) => {
@@ -103,8 +114,11 @@ function App() {
           setScore((sc) => sc + 10);
           setSpeed((sp) => Math.max(MIN_SPEED, sp - SPEED_STEP));
           const newFood = generateFood(newSnake);
-          if (!newFood) setGameOver(true);
-          else setFood(newFood);
+          if (!newFood) {
+            setGameOver(true);
+          } else {
+            setFood(newFood);
+          }
           return newSnake;
         }
 
@@ -119,10 +133,14 @@ function App() {
 
   useEffect(() => {
     const f = generateFood(getInitialSnake());
-    if (f) setFood(f);
+    if (f) {
+      setFood(f);
+    }
   }, []);
 
-  const startGame = useCallback(() => setIsStarted(true), []);
+  const startGame = useCallback(() => {
+    setIsStarted(true);
+  }, []);
 
   const restartGame = useCallback(() => {
     const newSnake = getInitialSnake();
@@ -148,9 +166,14 @@ function App() {
         const isFood = food && food.x === x && food.y === y;
 
         let cls = 'cell';
-        if (isHead) cls += ' snake-head';
-        else if (isSnake) cls += ' snake-body';
-        if (isFood) cls += ' food';
+        if (isHead) {
+          cls += ' snake-head';
+        } else if (isSnake) {
+          cls += ' snake-body';
+        }
+        if (isFood) {
+          cls += ' food';
+        }
 
         cells.push(<div key={`${x}-${y}`} className={cls} />);
       }
@@ -222,7 +245,9 @@ function App() {
                   <h2>⏸ Пауза</h2>
                   <p className="hint">Нажмите пробел, чтобы продолжить</p>
                   <button
-                    onClick={() => setIsPaused(false)}
+                    onClick={() => {
+                      setIsPaused(false);
+                    }}
                     className="btn"
                   >
                     ▶ Продолжить
