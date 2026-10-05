@@ -23,14 +23,11 @@ function App() {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (!isStarted) {
-        return;
-      }
       const key = e.key.toLowerCase();
 
       if (key === ' ' || key === 'escape') {
         e.preventDefault();
-        if (!gameOver) {
+        if (isStarted && !gameOver) {
           setIsPaused((p) => !p);
         }
         return;
@@ -38,6 +35,10 @@ function App() {
 
       if (gameOver) {
         return;
+      }
+
+      if (!isStarted) {
+        setIsStarted(true);
       }
 
       const current = directionRef.current;
@@ -137,7 +138,9 @@ function App() {
     }
   }, []);
 
-  const startGame = useCallback(() => setIsStarted(true), []);
+  const startGame = useCallback(() => {
+    setIsStarted(true);
+  }, []);
 
   const restartGame = useCallback(() => {
     const newSnake = getInitialSnake();
@@ -241,7 +244,12 @@ function App() {
                 <>
                   <h2>⏸ Пауза</h2>
                   <p className="hint">Нажмите пробел, чтобы продолжить</p>
-                  <button onClick={() => setIsPaused(false)} className="btn">
+                  <button
+                    onClick={() => {
+                      setIsPaused(false);
+                    }}
+                    className="btn"
+                  >
                     ▶ Продолжить
                   </button>
                 </>
